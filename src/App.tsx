@@ -1,5 +1,5 @@
 import React from "react";
-import { IonApp, IonRouterOutlet } from "@ionic/react";
+import { IonApp, IonRouterOutlet, IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel } from "@ionic/react";
 import { Route, Redirect, Switch } from "react-router-dom";
 import { IonReactRouter } from "@ionic/react-router";
 import Filter from "./pages/Filter";
@@ -29,12 +29,14 @@ import SideDrawer from "./component/SideDrawer"
 import Courses from "./pages/Courses";
 import AllGoals from "./pages/AllGoals";
 import CourseGoals from "./pages/CourseGoals";
+import { list, trophyOutline } from "ionicons/icons";
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
       <SideDrawer />
       <CoursesContextProvider>
+      <IonTabs>
         <IonRouterOutlet id="main">
         <Switch>
           <Route path="/filter" exact>
@@ -56,7 +58,18 @@ const App: React.FC = () => (
         </Route>
         </Switch>
           {/* <Redirect path="/" to="/courses" exact /> */}
-        </IonRouterOutlet>{" "}
+        </IonRouterOutlet>
+        <IonTabBar slot="bottom">
+        <IonTabButton tab="all-goals" href="/courses/all-goals">
+          <IonIcon icon={list} />
+          <IonLabel>All Goals</IonLabel>
+        </IonTabButton>
+        <IonTabButton tab="courses" href="/courses/lists">
+          <IonIcon icon={trophyOutline} />
+          <IonLabel>Courses</IonLabel>
+        </IonTabButton>
+      </IonTabBar>
+    </IonTabs>
       </CoursesContextProvider>
     </IonReactRouter>
   </IonApp>
