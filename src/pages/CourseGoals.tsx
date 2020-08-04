@@ -106,7 +106,11 @@ const CourseGoals :any  = () => {
     return  <div className="spin">
     <IonSpinner  className="ion-spinner" color="medium"   />
  </div>  }
-  if (error) return `Error! ${error}`;
+  if (error) {
+     return `Error! ${error}`;
+    // return <div>Error...</div>;
+
+  }
   const selectedCourse = data.goals
     .map((j: any) => j.course)
     .map((f: any) => f.title)

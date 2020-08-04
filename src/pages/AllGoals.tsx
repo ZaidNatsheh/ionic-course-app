@@ -43,8 +43,9 @@ const AllGoals: any = () => {
     );
   }
   if (error) {
-    return `Error! ${error}`;
+    return `Error! ${error}`
   }
+  console.log(error);
 
   return (
     <IonPage>

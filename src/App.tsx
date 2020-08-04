@@ -1,6 +1,6 @@
 import React from "react";
 import { IonApp, IonRouterOutlet } from "@ionic/react";
-import { Route, Redirect } from "react-router-dom";
+import { Route, Redirect, Switch } from "react-router-dom";
 import { IonReactRouter } from "@ionic/react-router";
 import Filter from "./pages/Filter";
 import CourseTabs from "./pages/CourseTabs";
@@ -26,6 +26,9 @@ import "@ionic/react/css/display.css";
 import "./theme/variables.css";
 import "./theme/theme.css";
 import SideDrawer from "./component/SideDrawer"
+import Courses from "./pages/Courses";
+import AllGoals from "./pages/AllGoals";
+import CourseGoals from "./pages/CourseGoals";
 
 const App: React.FC = () => (
   <IonApp>
@@ -33,13 +36,26 @@ const App: React.FC = () => (
       <SideDrawer />
       <CoursesContextProvider>
         <IonRouterOutlet id="main">
+        <Switch>
           <Route path="/filter" exact>
             <Filter />
           </Route>
           <Route path="/courses" exact>
             <CourseTabs />
           </Route>
-          <Redirect path="/" to="/courses" exact />
+          <Route exact path="/" render={()=> <Redirect to="/courses"/>} />
+        <Redirect path="/courses" to="/courses/all-goals" exact />
+        <Route path="/courses/lists" exact>
+          <Courses />
+        </Route>
+        <Route path="/courses/all-goals" exact>
+          <AllGoals />
+        </Route>
+        <Route path="/courses/:courseId">
+          <CourseGoals />
+        </Route>
+        </Switch>
+          {/* <Redirect path="/" to="/courses" exact /> */}
         </IonRouterOutlet>{" "}
       </CoursesContextProvider>
     </IonReactRouter>
